@@ -1,3 +1,19 @@
 {
-    
+    "files.exclude": {
+        "**/.git": true,
+        ".coverage/": true,
+        ".testresults/": true,
+        "**/*.exe": true
+    },
+    "cSpell.enabled": true,
+    "cSpell.enabledLanguageIds": [
+        "asciidoc",
+        "json",
+        "markdown",
+        "plaintext",
+        "powershell",
+        "restructuredtext",
+        "text",
+        "yml"
+    ]
 }

@@ -1,0 +1,23 @@
+{
+    "version": "0.1",
+    "language": "en",
+    "words": [
+        "choco",
+        "chocolatey",
+        "cinst",
+        "swellaby"
+    ],
+    "flagWords": [
+
+    ],
+    "cSpell.enabledLanguageIds": [
+        "asciidoc",
+        "json",
+        "markdown",
+        "plaintext",
+        "powershell",
+        "restructuredtext",
+        "text",
+        "yml"
+    ]
+}
