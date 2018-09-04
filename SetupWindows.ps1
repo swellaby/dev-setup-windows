@@ -5,10 +5,11 @@ param (
 $CurrentIdentity = [Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()
 if (-NOT $CurrentIdentity.IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator'))
 {
-    throw 'This script must be run with Administrative permissions'
+    Write-Host 'This script must be run with Administrative permissions on Windows...'
 }
 
-func Install-Chocolatey {
+func Install-Chocolatey
+{
     if (-NOT (Get-Command 'choco' -ErrorAction SilentlyContinue))
     {
         Write-Host 'Chocolatey NuGet not found. Installing now...'
