@@ -25,9 +25,16 @@ function Install-Golang
     Install-Tool 'golang'
 }
 
-function Install-Python()
+function Install-Python([bool]$includePython2x)
 {
+    Write-Host 'Installing Python 3.x...'
+    Install-Tool 'python'
 
+    if ($includePython2x)
+    {
+        Write-Host 'Installing Python 2.x...'
+        Install-Tool 'python2'
+    }
 }
 
 function Install-OpenJDK([ValidateSet(8,10,11)][int]$jdkVersion)
@@ -56,7 +63,7 @@ function Install-OpenJDK([ValidateSet(8,10,11)][int]$jdkVersion)
     }
 
     $outPath = Join-Path -Path $env:TEMP -ChildPath $jdkFileName
-    Invoke-WebRequest -Uri $uri -OutFile $outPath
+    Invoke-WebRequest -Uri $uri -Method 'GET' -OutFile $outPath
 
     if (-NOT (Get-Command '7z' -ErrorAction SilentlyContinue))
     {
@@ -95,14 +102,14 @@ function Install-OracleJDK([ValidateSet(8,10,11)][int]$jdkVersion)
 
         if ($jdkVersion -eq 11)
         {
-            $installMessage = 'You requested Oracle JDK 11, but that is not available on Windows.'
+            $installMessage = 'You requested Oracle JDK 11, but that is not available on Windows. '
         }
 
-        $installMessage += ' Installing Oracle JDK 10...'
+        $installMessage += 'Installing Oracle JDK 10...'
     }
     else
     {
-        $installMessage += ' Installing Oracle JDK 8...'
+        $installMessage += 'Installing Oracle JDK 8...'
         $jdkPackageArgs = 'jdk8 -params "source=false"'
     }
 
@@ -153,7 +160,8 @@ function Install-ProgrammingFrameworks
         [bool]$installMaven,
         [bool]$installGradle,
         [bool]$installNodejs,
-        [bool]$installPython
+        [bool]$installPython,
+        [bool]$includePython2x
     )
 
     if ($installDotnetCore)
@@ -181,8 +189,8 @@ function Install-ProgrammingFrameworks
         Install-Nodejs
     }
 
-    if ($installNodejs)
+    if ($installPython)
     {
-        Install-Nodejs
+        Install-Python $includePython2x
     }
 }

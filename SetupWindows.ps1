@@ -9,6 +9,7 @@ param (
     [bool]$installGradle = $True,
     [bool]$installNodejs = $True,
     [bool]$installPython = $True,
+    [bool]$includePython2x = $True,
     [bool]$installVSCode = $True,
     [bool]$installVSCodeExtensions = $True,
     [bool]$installVisualStudio = $True,
@@ -58,7 +59,7 @@ if (-NOT (Get-Command 'choco' -ErrorAction SilentlyContinue))
 }
 
 Install-Utilities $installMobaXterm $install7zip
-Install-ProgrammingFrameworks $installDotnetCore $installDotnetFramework $installGolang $installJava $installOpenJDK $jdkVersion $installMaven $installGradle $installNodejs $installPython
+Install-ProgrammingFrameworks $installDotnetCore $installDotnetFramework $installGolang $installJava $installOpenJDK $jdkVersion $installMaven $installGradle $installNodejs $installPython $includePython2x
 Install-DevelopmentTools $installVSCode $installVSCodeExtensions $installVisualStudio $installVSEnterpriseVersion $installIntelliJ $installIntelliJEnterpriseVersion $installGit
 Install-CloudTools $installGCPCommandLineTools $installAWSCommandLineTools $installAzureCommandLineTools
 Install-CollaborationTools $installMSTeams $installSlack

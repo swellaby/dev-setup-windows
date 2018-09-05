@@ -38,16 +38,23 @@ function Install-VSCode([bool]$installVSCodeExtensions)
 
 function Install-VisualStudio([bool]$installEnterpriseEdition)
 {
+    $params = "--package-parameters `"--add Microsoft.VisualStudio.Workload.ManagedDesktop Microsoft.VisualStudio.Workload.NetCoreTools Microsoft.VisualStudio.Workload.Universal Microsoft.VisualStudio.Workload.NetCrossPlat Microsoft.VisualStudio.Workload.NetWeb Microsoft.VisualStudio.Workload.WebCrossPlat`""
+    $toolName = ''
+    $versionName = ''
+
     if ($installEnterpriseEdition)
     {
-        Write-Host 'Installing Visual Studio 2017 Enterprise...'
-        Install-Tool 'visualstudio2017enterprise'
+        $versionName = 'Enterprise'
+        $toolName = 'visualstudio2017enterprise'
     }
     else
     {
-        Write-Host 'Installing Visual Studio 2017 Community...'
-        Install-Tool 'visualstudio2017community'
+        $versionName = 'Community'
+        $toolName = 'visualstudio2017community'
     }
+
+    Write-Host "Installing Visual Studio 2017 $versionName..."
+    Install-Tool "$toolName $params"
 }
 
 function Install-IntelliJ([bool]$installEnterpriseEdition)
