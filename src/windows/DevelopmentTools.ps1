@@ -1,65 +1,100 @@
+. $PSScriptRoot/ToolManager.ps1
 function Install-VSCode([bool]$installVSCodeExtensions)
 {
-    cinst -vy vscode
-    RefreshEnv
-    # Explicitly update path variables here as they don't always get picked up for some reason
-    # $env:PATH...
+    Install-Tool 'vscode'
+    # $env:Path += ';C:\Program Files\Microsoft VS Code\bin;C:\Program Files (x86)\Microsoft VS Code\bin'
 
-    if ($installVSCodeExtensions)
-    {
-        # iterate through list of extensions and install each
-        # Use iex here as sometimes this errors when an ext already exists
-        Invoke-Expression "code --install-extension "
-    }
+    # if ($installVSCodeExtensions)
+    # {
+    #     foreach ($recommendedExtension in $recommendedExtensions)
+    #     {
+    #         Write-Host "Installing VS Code Extension: $recommendedExtension"
+    #         # Use iex here as sometimes this errors when an ext already exists
+    #         Invoke-Expression "code --install-extension $recommendedExtension"
+    #     }
+    # }
 }
 
 function Install-VisualStudio([bool]$installEnterpriseEdition)
 {
     if ($installEnterpriseEdition)
     {
-        cinst -vy visualstudio2017enterprise
+        Install-Tool 'visualstudio2017enterprise'
     }
     else
     {
-        cinst -vy visualstudio2017community
+        Install-Tool 'visualstudio2017community'
     }
-
-    RefreshEnv
 }
 
 function Install-IntelliJ([bool]$installEnterpriseEdition)
 {
     if ($installEnterpriseEdition)
     {
-        cinst -vy intellijidea-community
+        Install-Tool 'intellijidea-enterprise'
     }
     else
     {
-        cinst -vy intellijidea-community
+        Install-Tool 'intellijidea-community'
     }
-
-    RefreshEnv
 }
 
 function Install-Git()
 {
-    cinst -vy git
-    RefreshEnv
+    Install-Tool 'git'
 }
 
 function Install-MobaXterm()
 {
-    cinst -vy mobaxterm
-    RefreshEnv
+    Install-Tool 'mobaxterm'
 }
 
 function Install-7Zip()
 {
-    cinst -vy 7zip
-    RefreshEnv
+    Install-Tool '7zip'
 }
 
-function Install-DevelopmentTools()
+function Install-DevelopmentTools
 {
+    param (
+        [bool]$installVSCode,
+        [bool]$installVSCodeExtensions,
+        [bool]$installVisualStudio,
+        [bool]$installVSEnterpriseVersion,
+        [bool]$installIntelliJ,
+        [bool]$installIntelliJEnterpriseVersion,
+        [bool]$installGit,
+        [bool]$installMobaXterm,
+        [bool]$install7zip
+    )
 
+    if ($installVSCode)
+    {
+        Install-VSCode $installVSCodeExtensions
+    }
+
+    if ($installVisualStudio)
+    {
+        Install-VisualStudio $installVSEnterpriseVersion
+    }
+
+    if ($installIntelliJ)
+    {
+        Install-IntelliJ $installIntelliJEnterpriseVersion
+    }
+
+    if ($installGit)
+    {
+        Install-Git
+    }
+
+    if ($installMobaXterm)
+    {
+        Install-MobaXterm
+    }
+
+    if ($install7zip)
+    {
+        Install-7Zip
+    }
 }

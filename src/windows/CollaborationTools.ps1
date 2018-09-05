@@ -1,24 +1,24 @@
+. $PSScriptRoot/ToolManager.ps1
+
 function Install-MSTeams()
 {
-    cinst -vy microsoft-teams
-    RefreshEnv
+    Install-Tool 'microsoft-teams'
 }
 
 function Install-Slack()
 {
-    cinst -vy slack
-    RefreshEnv
+    Install-Tool 'slack'
 }
 
 function Install-CollaborationTools([bool]$installMSTeams, [bool]$installSlack)
 {
     if ($installMSTeams)
     {
-        Install-MSTeams()
+        Install-MSTeams
     }
 
     if ($installSlack)
     {
-        Install-Slack()
+        Install-Slack
     }
 }
