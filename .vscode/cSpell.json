@@ -5,6 +5,10 @@
         "choco",
         "chocolatey",
         "cinst",
+        "intelli",
+        "intellij",
+        "moba",
+        "repos",
         "swellaby"
     ],
     "flagWords": [
