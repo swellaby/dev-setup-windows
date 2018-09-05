@@ -63,7 +63,10 @@ function Install-OpenJDK([ValidateSet(8,10,11)][int]$jdkVersion)
     }
 
     $outPath = Join-Path -Path $env:TEMP -ChildPath $jdkFileName
-    Invoke-WebRequest -Uri $uri -Method 'GET' -OutFile $outPath
+    if (-NOT (Test-Path $outPath))
+    {
+        Invoke-WebRequest -Uri $uri -Method 'GET' -OutFile $outPath
+    }
 
     if (-NOT (Get-Command '7z' -ErrorAction SilentlyContinue))
     {
@@ -78,7 +81,7 @@ function Install-OpenJDK([ValidateSet(8,10,11)][int]$jdkVersion)
     }
     else
     {
-        7z x "$outPath" -o "$destination"
+        7z x "$outPath" -o"$destination"
     }
 
     $currentMachinePath = [Environment]::GetEnvironmentVariable("Path", "Machine")
