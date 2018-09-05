@@ -21,8 +21,11 @@ param (
     [bool]$installGCPCommandLineTools = $True,
     [bool]$installAWSCommandLineTools = $True,
     [bool]$installAzureCommandLineTools = $True,
+    [bool]$installChrome = $True,
+    [bool]$installFirefox = $True,
     [bool]$installMSTeams = $True,
-    [bool]$installSlack = $True
+    [bool]$installSlack = $True,
+    [string]$devWorkspaceRootDirectory = 'c:/dev'
 )
 
 $CurrentIdentity = [Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()
@@ -53,7 +56,10 @@ if (-NOT (Get-Command 'choco' -ErrorAction SilentlyContinue))
     . $_.FullName
 }
 
-# Install-ProgrammingFrameworks @PSBoundParameters
-Install-DevelopmentTools $installVSCode $installVSCodeExtensions $installVisualStudio $installVSEnterpriseVersion $installIntelliJ $installIntelliJEnterpriseVersion $installGit $installMobaXterm $install7zip
+Install-Utilities $installMobaXterm $install7zip
+Install-ProgrammingFrameworks @PSBoundParameters
+Install-DevelopmentTools $installVSCode $installVSCodeExtensions $installVisualStudio $installVSEnterpriseVersion $installIntelliJ $installIntelliJEnterpriseVersion $installGit
 Install-CloudTools $installGCPCommandLineTools $installAWSCommandLineTools $installAzureCommandLineTools
 Install-CollaborationTools $installMSTeams $installSlack
+Install-WebBrowsers $installChrome $installFirefox
+Get-SwellabyGitHubRepos -rootDirectoryPath: $devWorkspaceRootDirectory
