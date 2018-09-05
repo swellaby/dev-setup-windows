@@ -1,7 +1,7 @@
 function Install-Tool([string]$toolArgs)
 {
-    Write-Host "cinst -vy $toolArgs"
-    #RefreshEnv
+    cinst -v $toolArgs
+    RefreshEnv
 }
 
 function Upgrade-Tool([string]$toolArgs)
