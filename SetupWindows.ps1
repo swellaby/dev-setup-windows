@@ -25,6 +25,7 @@ param (
     [bool]$installFirefox = $True,
     [bool]$installMSTeams = $True,
     [bool]$installSlack = $True,
+    [bool]$cloneSwellabyRepos = $False,
     [string]$devWorkspaceRootDirectory = 'c:/dev'
 )
 
@@ -57,9 +58,9 @@ if (-NOT (Get-Command 'choco' -ErrorAction SilentlyContinue))
 }
 
 Install-Utilities $installMobaXterm $install7zip
-Install-ProgrammingFrameworks @PSBoundParameters
+Install-ProgrammingFrameworks $installDotnetCore $installDotnetFramework $installGolang $installJava $installOpenJDK $jdkVersion $installMaven $installGradle $installNodejs $installPython
 Install-DevelopmentTools $installVSCode $installVSCodeExtensions $installVisualStudio $installVSEnterpriseVersion $installIntelliJ $installIntelliJEnterpriseVersion $installGit
 Install-CloudTools $installGCPCommandLineTools $installAWSCommandLineTools $installAzureCommandLineTools
 Install-CollaborationTools $installMSTeams $installSlack
 Install-WebBrowsers $installChrome $installFirefox
-Get-SwellabyGitHubRepos -rootDirectoryPath: $devWorkspaceRootDirectory
+Get-SwellabyGitHubRepos -cloneSwellabyRepos: $cloneSwellabyRepos -rootDirectoryPath: $devWorkspaceRootDirectory

@@ -4,17 +4,36 @@ function Install-VSCode([bool]$installVSCodeExtensions)
 {
     Write-Host 'Installing Visual Studio Code...'
     Install-Tool 'vscode'
-    # $env:Path += ';C:\Program Files\Microsoft VS Code\bin;C:\Program Files (x86)\Microsoft VS Code\bin'
+    $env:Path += ';C:\Program Files\Microsoft VS Code\bin;C:\Program Files (x86)\Microsoft VS Code\bin'
 
-    # if ($installVSCodeExtensions)
-    # {
-    #     foreach ($recommendedExtension in $recommendedExtensions)
-    #     {
-    #         Write-Host "Installing VS Code Extension: $recommendedExtension"
-    #         # Use iex here as sometimes this errors when an ext already exists
-    #         Invoke-Expression "code --install-extension $recommendedExtension"
-    #     }
-    # }
+    if ($installVSCodeExtensions)
+    {
+        $recommendedExtensions = @(
+            'ms-python.python',
+            'msjsdiag.debugger-for-chrome',
+            'dbaeumer.vscode-eslint',
+            'eamodio.gitlens',
+            'eg2.tslint',
+            'robertohuertasm.vscode-icons',
+            'ms-vscode.csharp',
+            'PeterJausovec.vscode-docker',
+            'ms-vscode.Go',
+            'ms-vscode.PowerShell',
+            'EditorConfig.EditorConfig',
+            'vscjava.vscode-java-pack',
+            'streetsidesoftware.code-spell-checker',
+            'christian-kohler.path-intellisense',
+            'ms-vsts.team',
+            'pflannery.vscode-versionlens'
+        )
+
+        foreach ($recommendedExtension in $recommendedExtensions)
+        {
+            Write-Host "Installing VS Code Extension: $recommendedExtension"
+            # Use iex here as sometimes this errors when an ext already exists
+            Invoke-Expression "code --install-extension $recommendedExtension"
+        }
+    }
 }
 
 function Install-VisualStudio([bool]$installEnterpriseEdition)
