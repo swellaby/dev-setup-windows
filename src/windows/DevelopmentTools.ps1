@@ -1,6 +1,8 @@
 . $PSScriptRoot/ToolManager.ps1
+
 function Install-VSCode([bool]$installVSCodeExtensions)
 {
+    Write-Host "Installing Visual Studio Code..."
     Install-Tool 'vscode'
     # $env:Path += ';C:\Program Files\Microsoft VS Code\bin;C:\Program Files (x86)\Microsoft VS Code\bin'
 
@@ -19,10 +21,12 @@ function Install-VisualStudio([bool]$installEnterpriseEdition)
 {
     if ($installEnterpriseEdition)
     {
+        Write-Host "Installing Visual Studio 2017 Enterprise..."
         Install-Tool 'visualstudio2017enterprise'
     }
     else
     {
+        Write-Host "Installing Visual Studio 2017 Community..."
         Install-Tool 'visualstudio2017community'
     }
 }
@@ -31,26 +35,31 @@ function Install-IntelliJ([bool]$installEnterpriseEdition)
 {
     if ($installEnterpriseEdition)
     {
+        Write-Host "Installing IntelliJ Enterprise..."
         Install-Tool 'intellijidea-enterprise'
     }
     else
     {
+        Write-Host "Installing IntelliJ Community..."
         Install-Tool 'intellijidea-community'
     }
 }
 
 function Install-Git()
 {
+    Write-Host "Installing git..."
     Install-Tool 'git'
 }
 
 function Install-MobaXterm()
 {
+    Write-Host "Installing MobaXterm..."
     Install-Tool 'mobaxterm'
 }
 
 function Install-7Zip()
 {
+    Write-Host "Installing 7Zip..."
     Install-Tool '7zip'
 }
 

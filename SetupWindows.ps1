@@ -18,6 +18,9 @@ param (
     [bool]$installGit = $True,
     [bool]$installMobaXterm = $True,
     [bool]$install7zip = $True,
+    [bool]$installGCPCommandLineTools = $True,
+    [bool]$installAWSCommandLineTools = $True,
+    [bool]$installAzureCommandLineTools = $True,
     [bool]$installMSTeams = $True,
     [bool]$installSlack = $True
 )
@@ -38,13 +41,13 @@ if (-NOT $CurrentIdentity.IsInRole([Security.Principal.WindowsBuiltInRole] 'Admi
     Exit
 }
 
-# if (-NOT (Get-Command 'choco' -ErrorAction SilentlyContinue))
-# {
-#     Write-Host 'Chocolatey NuGet not found. Installing now...'
-#     Set-ExecutionPolicy Bypass -Scope Process -Force
-#     Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-#     RefreshEnv
-# }
+if (-NOT (Get-Command 'choco' -ErrorAction SilentlyContinue))
+{
+    Write-Host 'Chocolatey NuGet not found. Installing now...'
+    Set-ExecutionPolicy Bypass -Scope Process -Force
+    Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+    RefreshEnv
+}
 
 (Get-ChildItem -Path "$((Get-Item $PSScriptRoot).FullName)/src/windows/*" -Include "*.ps1" -Exclude "ToolManager.ps1" )| ForEach-Object {
     . $_.FullName
@@ -52,4 +55,5 @@ if (-NOT $CurrentIdentity.IsInRole([Security.Principal.WindowsBuiltInRole] 'Admi
 
 # Install-ProgrammingFrameworks @PSBoundParameters
 Install-DevelopmentTools $installVSCode $installVSCodeExtensions $installVisualStudio $installVSEnterpriseVersion $installIntelliJ $installIntelliJEnterpriseVersion $installGit $installMobaXterm $install7zip
+Install-CloudTools $installGCPCommandLineTools $installAWSCommandLineTools $installAzureCommandLineTools
 Install-CollaborationTools $installMSTeams $installSlack
