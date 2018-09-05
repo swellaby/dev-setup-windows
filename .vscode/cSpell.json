@@ -7,9 +7,13 @@
         "cinst",
         "intelli",
         "intellij",
+        "intellijidea",
         "moba",
+        "mobaxterm",
         "repos",
-        "swellaby"
+        "swellaby",
+        "visualstudio",
+        "visualstudio2017enterprise"
     ],
     "flagWords": [
 

@@ -1,8 +1,3 @@
-function Install-ProgrammingFrameworks()
-{
-
-}
-
 function Install-DotnetCore()
 {
 
@@ -24,6 +19,11 @@ function Install-Python()
 }
 
 function Install-Java()
+{
+
+}
+
+function Install-ProgrammingFrameworks()
 {
 
 }
