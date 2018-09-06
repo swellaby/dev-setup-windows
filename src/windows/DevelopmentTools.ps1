@@ -4,10 +4,16 @@ function Install-VSCode([bool]$installVSCodeExtensions)
 {
     Write-Host 'Installing Visual Studio Code...'
     Install-Tool 'vscode'
-    $env:Path += ';C:\Program Files\Microsoft VS Code\bin;C:\Program Files (x86)\Microsoft VS Code\bin'
+
 
     if ($installVSCodeExtensions)
     {
+        if (-NOT (Get-Command 'code' -ErrorAction SilentlyContinue))
+        {
+            $env:Path += ';C:\Program Files\Microsoft VS Code\bin;C:\Program Files (x86)\Microsoft VS Code\bin'
+            RefreshEnv
+        }
+
         $recommendedExtensions = @(
             'ms-python.python',
             'msjsdiag.debugger-for-chrome',
@@ -38,7 +44,7 @@ function Install-VSCode([bool]$installVSCodeExtensions)
 
 function Install-VisualStudio([bool]$installEnterpriseEdition)
 {
-    $params = "--package-parameters `"--add Microsoft.VisualStudio.Workload.ManagedDesktop Microsoft.VisualStudio.Workload.NetCoreTools Microsoft.VisualStudio.Workload.Universal Microsoft.VisualStudio.Workload.NetCrossPlat Microsoft.VisualStudio.Workload.NetWeb Microsoft.VisualStudio.Workload.WebCrossPlat`""
+    $params = "--package-parameters `"--add Microsoft.VisualStudio.Workload.ManagedDesktop --add Microsoft.VisualStudio.Workload.NetCoreTools --add Microsoft.VisualStudio.Workload.Universal --add Microsoft.VisualStudio.Workload.NetCrossPlat --add Microsoft.VisualStudio.Workload.NetWeb --add Microsoft.VisualStudio.Workload.WebCrossPlat`""
     $toolName = ''
     $versionName = ''
 

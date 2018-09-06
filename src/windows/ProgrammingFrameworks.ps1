@@ -16,6 +16,12 @@ function Install-Nodejs
 {
     Write-Host 'Installing Node.js...'
     Install-Tool 'nodejs'
+
+    if (-NOT (Get-Command 'npm' -ErrorAction SilentlyContinue))
+    {
+        $env:Path += "$($env:APPDATA)\npm;"
+    }
+
     npm i -g yo
 }
 
@@ -42,6 +48,7 @@ function Install-OpenJDK([ValidateSet(8,10,11)][int]$jdkVersion)
     $uri = ''
     $jdkFileName = ''
     $destination = 'C:\Program Files\Java\'
+    $extractedRootDirectory = ''
 
     if ($jdkVersion -eq 8)
     {
@@ -52,17 +59,19 @@ function Install-OpenJDK([ValidateSet(8,10,11)][int]$jdkVersion)
     if ($jdkVersion -eq 11)
     {
         $uri = 'https://download.java.net/java/early_access/jdk11/28/GPL/openjdk-11+28_windows-x64_bin.zip'
-        $jdkFileName = 'openjdk-11_preview_windows-x64_bin.tar.gz'
+        $jdkFileName = 'openjdk-11_preview_windows-x64_bin.tar'
         $destination += 'jdk1.11.0_preview'
     }
     else
     {
         $uri = 'https://download.java.net/java/GA/jdk10/10.0.2/19aef61b38124481863b1413dce1855f/13/openjdk-10.0.2_windows-x64_bin.tar.gz'
-        $jdkFileName = 'openjdk-10.0.2_windows-x64_bin.tar.gz'
+        $jdkFileName = 'openjdk-10.0.2_windows-x64_bin.tar'
         $destination += 'jdk1.10.0_2'
+        $extractedRootDirectory = 'jdk-10.0.2'
     }
 
-    $outPath = Join-Path -Path $env:TEMP -ChildPath $jdkFileName
+    $outPath = Join-Path -Path $env:TEMP -ChildPath "$jdkFileName.gz"
+    $tmpExtractionPath = "$($env:TEMP)\$extractedRootDirectory"
     if (-NOT (Test-Path $outPath))
     {
         Invoke-WebRequest -Uri $uri -Method 'GET' -OutFile $outPath
@@ -77,18 +86,36 @@ function Install-OpenJDK([ValidateSet(8,10,11)][int]$jdkVersion)
             Install-Package -Scope CurrentUser -Force 7Zip4PowerShell > $null
         }
 
-        Expand-7Zip $outPath $destination
+        Expand-7Zip $outPath "$tmpExtractionPath"
     }
     else
     {
-        7z x "$outPath" -so | 7z x -aoa -si -ttar -o"$destination"
+        $tarFilePath = Join-Path -Path $env:TEMP -ChildPath $jdkFileName
+        if (-NOT (Test-Path $tarFilePath))
+        {
+            7z e "$outPath" -o"$env:TEMP"
+        }
+
+        7z x "$tarFilePath" -aoa -o"$env:TEMP"
+
+        Copy-Item "$tmpExtractionPath" -Destination "$destination" -Recurse -Force
     }
 
     $currentMachinePath = [Environment]::GetEnvironmentVariable("Path", "Machine")
-    [Environment]::SetEnvironmentVariable("Path", $currentMachinePath + ";$destination\bin", [System.EnvironmentVariableTarget]::Machine)
-    [Environment]::SetEnvironmentVariable("JAVA_HOME", $destination, [System.EnvironmentVariableTarget]::Machine)
+    $binPath = "$destination\bin"
 
-    [Environment]::SetEnvironmentVariable("Path", $env:Path + ";$destination\bin", [System.EnvironmentVariableTarget]::User)
+    if (-NOT ([Regex]::escape($currentMachinePath) -like "*$([Regex]::escape($binPath))*"))
+    {
+        [Environment]::SetEnvironmentVariable("Path", $currentMachinePath + ";$binPath;", [System.EnvironmentVariableTarget]::Machine)
+    }
+
+
+    if (-NOT ([Regex]::escape($env:Path) -like "*$([Regex]::escape($binPath))*"))
+    {
+        [Environment]::SetEnvironmentVariable("Path", $env:Path + ";$binPath;", [System.EnvironmentVariableTarget]::User)
+    }
+
+    [Environment]::SetEnvironmentVariable("JAVA_HOME", $destination, [System.EnvironmentVariableTarget]::Machine)
     [Environment]::SetEnvironmentVariable("JAVA_HOME", $destination, [System.EnvironmentVariableTarget]::User)
 
     RefreshEnv

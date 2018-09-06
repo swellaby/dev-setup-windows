@@ -1,6 +1,6 @@
 function Install-Tool([string]$toolArgs)
 {
-    cinst -v $toolArgs
+    Invoke-Expression "cinst -y $toolArgs"
     RefreshEnv
 }
 

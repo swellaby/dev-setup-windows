@@ -2,6 +2,7 @@
     "version": "0.1",
     "language": "en",
     "words": [
+        "appdata",
         "awscli",
         "choco",
         "chocolatey",
@@ -22,6 +23,7 @@
         "mobaxterm",
         "openjdk",
         "pflannery",
+        "recurse",
         "repos",
         "robertohuertasm",
         "streetsidesoftware",
