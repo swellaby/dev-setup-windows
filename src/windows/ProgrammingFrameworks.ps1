@@ -52,13 +52,13 @@ function Install-OpenJDK([ValidateSet(8,10,11)][int]$jdkVersion)
     if ($jdkVersion -eq 11)
     {
         $uri = 'https://download.java.net/java/early_access/jdk11/28/GPL/openjdk-11+28_windows-x64_bin.zip'
-        $jdkFileName = 'openjdk-11_preview_windows-x64_bin.tar'
+        $jdkFileName = 'openjdk-11_preview_windows-x64_bin.tar.gz'
         $destination += 'jdk1.11.0_preview'
     }
     else
     {
         $uri = 'https://download.java.net/java/GA/jdk10/10.0.2/19aef61b38124481863b1413dce1855f/13/openjdk-10.0.2_windows-x64_bin.tar.gz'
-        $jdkFileName = 'openjdk-10.0.2_windows-x64_bin.tar'
+        $jdkFileName = 'openjdk-10.0.2_windows-x64_bin.tar.gz'
         $destination += 'jdk1.10.0_2'
     }
 
@@ -81,7 +81,7 @@ function Install-OpenJDK([ValidateSet(8,10,11)][int]$jdkVersion)
     }
     else
     {
-        7z x "$outPath" -o"$destination"
+        7z x "$outPath" -so | 7z x -aoa -si -ttar -o"$destination"
     }
 
     $currentMachinePath = [Environment]::GetEnvironmentVariable("Path", "Machine")
