@@ -33,16 +33,9 @@ param (
 $CurrentIdentity = [Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()
 if (-NOT $CurrentIdentity.IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator'))
 {
-    Write-Host 'This script must be run with Administrative permissions on Windows. Attempting to re-start with required permissions...'
-
-    $args = "-NoExit -File `"$PSCommandPath`" "
-    if ($PSBoundParameters.Keys.Count -gt 0)
-    {
-        # I am sure there is a cleaner way to utilize splatting here, but this will work for now.
-        $args += Invoke-Expression "echo @PSBoundParameters"
-    }
-
-    Start-Process -FilePath powershell.exe -WorkingDirectory $PSScriptRoot -Verb RunAs -ArgumentList $args
+    Write-Host 'This script must be run with Administrative permissions on Windows'
+    Write-Host 'Please re-execute this script from an Administrative context. Exiting in 3 seconds....'
+    Start-Sleep -Seconds 3
     Exit
 }
 
