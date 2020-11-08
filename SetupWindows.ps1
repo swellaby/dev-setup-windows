@@ -47,7 +47,7 @@ if (-NOT (Get-Command 'choco' -ErrorAction SilentlyContinue))
     RefreshEnv
 }
 
-(Get-ChildItem -Path "$((Get-Item $PSScriptRoot).FullName)/src/windows/*" -Include "*.ps1" -Exclude "ToolManager.ps1" )| ForEach-Object {
+(Get-ChildItem -Path "$((Get-Item $PSScriptRoot).FullName)/src/*" -Include "*.ps1" -Exclude "ToolManager.ps1" )| ForEach-Object {
     . $_.FullName
 }
 
