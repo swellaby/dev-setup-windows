@@ -1,0 +1,16 @@
+name: PR
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  lint:
+    name: lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Run PSSA
+        uses: devblackops/github-action-psscriptanalyzer@master
