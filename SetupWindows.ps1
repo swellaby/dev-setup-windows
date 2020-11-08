@@ -1,3 +1,4 @@
+[System.Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingInvokeExpression', '', Justification='Trusted script for execution')]
 param (
     [bool]$installDotnetCore = $True,
     [bool]$installDotnetFramework = $False,
@@ -33,15 +34,15 @@ param (
 $CurrentIdentity = [Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()
 if (-NOT $CurrentIdentity.IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator'))
 {
-    Write-Host 'This script must be run with Administrative permissions on Windows'
-    Write-Host 'Please re-execute this script from an Administrative context. Exiting in 3 seconds....'
+    Write-Output 'This script must be run with Administrative permissions on Windows'
+    Write-Output 'Please re-execute this script from an Administrative context. Exiting in 3 seconds....'
     Start-Sleep -Seconds 3
     Exit
 }
 
 if (-NOT (Get-Command 'choco' -ErrorAction SilentlyContinue))
 {
-    Write-Host 'Chocolatey NuGet not found. Installing now...'
+    Write-Output 'Chocolatey NuGet not found. Installing now...'
     Set-ExecutionPolicy Bypass -Scope Process -Force
     Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
     RefreshEnv
