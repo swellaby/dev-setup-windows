@@ -2,19 +2,19 @@
 
 function Install-DotnetCore
 {
-    Write-Host 'Installing .NET Core SDK...'
+    Write-Output 'Installing .NET Core SDK...'
     Install-Tool 'dotnetcore-sdk'
 }
 
 function Install-DotnetFramework
 {
-    Write-Host 'Installing .NET Framework 4.7.1...'
+    Write-Output 'Installing .NET Framework 4.7.1...'
     Install-Tool 'dotnet4.7.1'
 }
 
 function Install-Nodejs
 {
-    Write-Host 'Installing Node.js...'
+    Write-Output 'Installing Node.js...'
     Install-Tool 'nodejs'
 
     if (-NOT (Get-Command 'npm' -ErrorAction SilentlyContinue))
@@ -27,18 +27,18 @@ function Install-Nodejs
 
 function Install-Golang
 {
-    Write-Host 'Installing Golang...'
+    Write-Output 'Installing Golang...'
     Install-Tool 'golang'
 }
 
 function Install-Python([bool]$includePython2x)
 {
-    Write-Host 'Installing Python 3.x...'
+    Write-Output 'Installing Python 3.x...'
     Install-Tool 'python'
 
     if ($includePython2x)
     {
-        Write-Host 'Installing Python 2.x...'
+        Write-Output 'Installing Python 2.x...'
         Install-Tool 'python2'
     }
 }
@@ -52,7 +52,7 @@ function Install-OpenJDK([ValidateSet(8,10,11)][int]$jdkVersion)
 
     if ($jdkVersion -eq 8)
     {
-        Write-Host = 'You requested Open JDK 8, but that is not available on Windows. Will install the Open JDK 10 instead.'
+        Write-Output = 'You requested Open JDK 8, but that is not available on Windows. Will install the Open JDK 10 instead.'
         $jdkVersion = 10
     }
 
@@ -79,11 +79,11 @@ function Install-OpenJDK([ValidateSet(8,10,11)][int]$jdkVersion)
 
     if (-NOT (Get-Command '7z' -ErrorAction SilentlyContinue))
     {
-        Write-Host '7zip not found. Install PowerShell Package...'
+        Write-Output '7zip not found. Install PowerShell Package...'
 
         if (-NOT (Get-Command Expand-7Zip -ErrorAction Ignore))
         {
-            Install-Package -Scope CurrentUser -Force 7Zip4PowerShell > $null
+            Install-Package -Scope CurrentUser -Force -Name 7Zip4PowerShell > $null
         }
 
         Expand-7Zip $outPath "$tmpExtractionPath"
@@ -143,7 +143,7 @@ function Install-OracleJDK([ValidateSet(8,10,11)][int]$jdkVersion)
         $jdkPackageArgs = 'jdk8 -params "source=false"'
     }
 
-    Write-Host $installMessage
+    Write-Output $installMessage
     Install-Tool $jdkPackageArgs
 }
 
@@ -167,13 +167,13 @@ function Install-Java
 
     if ($installMaven)
     {
-        Write-Host 'Installing Maven...'
+        Write-Output 'Installing Maven...'
         Install-Tool 'maven'
     }
 
     if ($installGradle)
     {
-        Write-Host 'Installing Gradle...'
+        Write-Output 'Installing Gradle...'
         Install-Tool 'gradle'
     }
 }
