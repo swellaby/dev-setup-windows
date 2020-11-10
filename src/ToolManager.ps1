@@ -7,9 +7,18 @@ function Install-Tool() {
     RefreshEnv
 }
 
-function Update-Tool([string]$toolArgs) {
+function Update-Tool() {
+    [CmdletBinding(SupportsShouldProcess = $True)]
+    param(
+        [string]$toolArgs
+    )
+
     choco upgrade -y $toolArgs
     RefreshEnv
+
+    # Not exposed externally and What-If/Confirm not supported internally
+    # So just a no-op here to satiate PSAnalyzer
+    $PSCmdlet.ShouldProcess()
 }
 
 function Test-ToolExists([string]$tool) {
