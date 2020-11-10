@@ -2,13 +2,13 @@
 
 function Install-MobaXterm()
 {
-    Write-Host 'Installing MobaXterm...'
+    Write-Output 'Installing MobaXterm...'
     Install-Tool 'mobaxterm'
 }
 
 function Install-7Zip()
 {
-    Write-Host 'Installing 7Zip...'
+    Write-Output 'Installing 7Zip...'
     Install-Tool '7zip'
 }
 

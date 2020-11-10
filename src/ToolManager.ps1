@@ -1,23 +1,31 @@
-function Install-Tool([string]$toolArgs)
-{
+function Install-Tool() {
+    [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingInvokeExpression', '', Justification = 'Trusted script for execution')]
+    param (
+        [string]$toolArgs
+    )
     Invoke-Expression "cinst -y $toolArgs"
     RefreshEnv
 }
 
-function Upgrade-Tool([string]$toolArgs)
-{
+function Update-Tool() {
+    [CmdletBinding(SupportsShouldProcess = $True)]
+    param(
+        [string]$toolArgs
+    )
+
     choco upgrade -y $toolArgs
     RefreshEnv
+
+    # Not exposed externally and What-If/Confirm not supported internally
+    # So just a no-op here to satiate PSAnalyzer
+    $PSCmdlet.ShouldProcess()
 }
 
-function Tool-Exists([string]$tool)
-{
-    if (-NOT (Get-Command "$tool" -ErrorAction SilentlyContinue))
-    {
+function Test-ToolExists([string]$tool) {
+    if (-NOT (Get-Command "$tool" -ErrorAction SilentlyContinue)) {
         return $False
     }
-    else
-    {
+    else {
         return $True
     }
 }
