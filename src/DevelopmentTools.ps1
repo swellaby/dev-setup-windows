@@ -55,15 +55,15 @@ function Install-VisualStudio([bool]$installEnterpriseEdition)
     if ($installEnterpriseEdition)
     {
         $versionName = 'Enterprise'
-        $toolName = 'visualstudio2017enterprise'
+        $toolName = 'visualstudio2019enterprise'
     }
     else
     {
         $versionName = 'Community'
-        $toolName = 'visualstudio2017community'
+        $toolName = 'visualstudio2019community'
     }
 
-    Write-Output "Installing Visual Studio 2017 $versionName..."
+    Write-Output "Installing Visual Studio 2019 $versionName..."
     Install-Tool "$toolName $params"
 }
 
