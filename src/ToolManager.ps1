@@ -3,7 +3,10 @@ function Install-Tool() {
     param (
         [string]$toolArgs
     )
-    Invoke-Expression "cinst -y $toolArgs"
+    # Timeout value is in seconds
+    # Increase to 4 hours due to the long install periods
+    # for things like IDEs and build tools.
+    Invoke-Expression "cinst -y $toolArgs --timeout 14400"
     RefreshEnv
 }
 
