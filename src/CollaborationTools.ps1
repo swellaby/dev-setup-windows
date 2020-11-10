@@ -2,13 +2,13 @@
 
 function Install-MSTeams()
 {
-    Write-Host 'Installing Microsoft Teams...'
+    Write-Output 'Installing Microsoft Teams...'
     Install-Tool 'microsoft-teams'
 }
 
 function Install-Slack()
 {
-    Write-Host 'Installing Slack...'
+    Write-Output 'Installing Slack...'
     Install-Tool 'slack'
 }
 
