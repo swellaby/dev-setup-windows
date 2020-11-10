@@ -7,12 +7,12 @@ function Install-Tool() {
     RefreshEnv
 }
 
-function Upgrade-Tool([string]$toolArgs) {
+function Update-Tool([string]$toolArgs) {
     choco upgrade -y $toolArgs
     RefreshEnv
 }
 
-function Tool-Exists([string]$tool) {
+function Test-ToolExists([string]$tool) {
     if (-NOT (Get-Command "$tool" -ErrorAction SilentlyContinue)) {
         return $False
     }
