@@ -1,8 +1,13 @@
 . $PSScriptRoot/ToolManager.ps1
 
-function Install-VSCode([bool]$installVSCodeExtensions)
+function Install-VSCode()
 {
-    Write-Host 'Installing Visual Studio Code...'
+    [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingInvokeExpression', '', Justification='Trusted script for execution')]
+    param(
+        [bool]$installVSCodeExtensions
+    )
+
+    Write-Output 'Installing Visual Studio Code...'
     Install-Tool 'vscode'
 
 
@@ -35,8 +40,7 @@ function Install-VSCode([bool]$installVSCodeExtensions)
 
         foreach ($recommendedExtension in $recommendedExtensions)
         {
-            Write-Host "Installing VS Code Extension: $recommendedExtension"
-            # Use iex here as sometimes this errors when an ext already exists
+            Write-Output "Installing VS Code Extension: $recommendedExtension"
             Invoke-Expression "code --install-extension $recommendedExtension"
         }
     }
@@ -59,7 +63,7 @@ function Install-VisualStudio([bool]$installEnterpriseEdition)
         $toolName = 'visualstudio2017community'
     }
 
-    Write-Host "Installing Visual Studio 2017 $versionName..."
+    Write-Output "Installing Visual Studio 2017 $versionName..."
     Install-Tool "$toolName $params"
 }
 
@@ -67,19 +71,19 @@ function Install-IntelliJ([bool]$installEnterpriseEdition)
 {
     if ($installEnterpriseEdition)
     {
-        Write-Host 'Installing IntelliJ Enterprise...'
+        Write-Output 'Installing IntelliJ Enterprise...'
         Install-Tool 'intellijidea-enterprise'
     }
     else
     {
-        Write-Host 'Installing IntelliJ Community...'
+        Write-Output 'Installing IntelliJ Community...'
         Install-Tool 'intellijidea-community'
     }
 }
 
 function Install-Git()
 {
-    Write-Host 'Installing git...'
+    Write-Output 'Installing git...'
     Install-Tool 'git'
 }
 
