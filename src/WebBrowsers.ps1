@@ -3,13 +3,13 @@
 
 function Install-Chrome
 {
-    Write-Host 'Installing Chrome...'
+    Write-Output 'Installing Chrome...'
     Install-Tool 'googlechrome'
 }
 
 function Install-Firefox
 {
-    Write-Host 'Installing Firefox...'
+    Write-Output 'Installing Firefox...'
     Install-Tool 'firefox'
 }
 
