@@ -14,8 +14,8 @@ function Install-DotnetFramework
 
 function Install-Nodejs
 {
-    Write-Output 'Installing Node.js...'
-    Install-Tool 'nodejs'
+    Write-Output 'Installing Node.js LTS...'
+    Install-Tool 'nodejs-lts'
 
     if (-NOT (Get-Command 'npm' -ErrorAction SilentlyContinue))
     {
