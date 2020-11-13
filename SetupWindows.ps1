@@ -1,34 +1,34 @@
 [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingInvokeExpression', '', Justification='Trusted script for execution')]
 param (
-    [bool]$installDotnetCore = $True,
-    [bool]$installDotnetFramework = $False,
-    [bool]$installGolang = $True,
-    [bool]$installJava = $True,
-    [bool]$installOpenJDK = $True,
-    [ValidateSet(8,10,11)][int]$jdkVersion = 10,
-    [bool]$installMaven = $True,
-    [bool]$installGradle = $True,
-    [bool]$installNodejs = $True,
-    [bool]$installPython = $True,
-    [bool]$includePython2x = $True,
-    [bool]$installVSCode = $True,
-    [bool]$installVSCodeExtensions = $True,
-    [bool]$installVisualStudio = $True,
-    [bool]$installVSEnterpriseVersion = $False,
-    [bool]$installIntelliJ = $False,
-    [bool]$installIntelliJEnterpriseVersion = $False,
-    [bool]$installGit = $True,
-    [bool]$installMobaXterm = $True,
-    [bool]$install7zip = $True,
-    [bool]$installGCPCommandLineTools = $True,
-    [bool]$installAWSCommandLineTools = $True,
-    [bool]$installAzureCommandLineTools = $True,
-    [bool]$installChrome = $True,
-    [bool]$installFirefox = $True,
-    [bool]$installMSTeams = $True,
-    [bool]$installSlack = $True,
-    [bool]$cloneSwellabyRepos = $False,
-    [string]$devWorkspaceRootDirectory = 'c:/dev'
+    [bool]$InstallDotnetCore = $True,
+    [bool]$InstallDotnetFramework = $False,
+    [bool]$InstallGolang = $True,
+    [bool]$InstallJava = $True,
+    [bool]$InstallOpenJDK = $True,
+    [ValidateSet(8,10,11)][int]$JDKVersion = 10,
+    [bool]$InstallMaven = $True,
+    [bool]$InstallGradle = $True,
+    [bool]$InstallNodejs = $True,
+    [bool]$InstallPython = $True,
+    [bool]$IncludePython2x = $False,
+    [bool]$InstallVSCode = $True,
+    [bool]$InstallVSCodeExtensions= $True,
+    [bool]$InstallVisualStudio = $True,
+    [bool]$InstallVSEnterpriseVersion = $False,
+    [bool]$InstallIntelliJ = $False,
+    [bool]$InstallIntelliJUltimateVersion = $False,
+    [bool]$InstallGit = $True,
+    [bool]$InstallMobaXterm = $True,
+    [bool]$Install7zip = $True,
+    [bool]$InstallGCPCommandLineTools = $True,
+    [bool]$InstallAWSCommandLineTools = $True,
+    [bool]$InstallAzureCommandLineTools = $True,
+    [bool]$InstallChrome = $True,
+    [bool]$InstallFirefox = $True,
+    [bool]$InstallMSTeams = $True,
+    [bool]$InstallSlack = $True,
+    [bool]$CloneSwellabyRepos = $False,
+    [string]$DevWorkspaceRootDirectory = 'c:/dev'
 )
 
 $CurrentIdentity = [Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()
@@ -52,10 +52,10 @@ if (-NOT (Get-Command 'choco' -ErrorAction SilentlyContinue))
     . $_.FullName
 }
 
-Install-Utilities $installMobaXterm $install7zip
-Install-ProgrammingFrameworks $installDotnetCore $installDotnetFramework $installGolang $installJava $installOpenJDK $jdkVersion $installMaven $installGradle $installNodejs $installPython $includePython2x
-Install-DevelopmentTools $installVSCode $installVSCodeExtensions $installVisualStudio $installVSEnterpriseVersion $installIntelliJ $installIntelliJEnterpriseVersion $installGit
-Install-CloudTools $installGCPCommandLineTools $installAWSCommandLineTools $installAzureCommandLineTools
-Install-CollaborationTools $installMSTeams $installSlack
-Install-WebBrowsers $installChrome $installFirefox
-Get-SwellabyGitHubRepos -cloneSwellabyRepos: $cloneSwellabyRepos -rootDirectoryPath: $devWorkspaceRootDirectory
+Install-Utilities $InstallMobaXterm $Install7zip
+Install-ProgrammingFrameworks $InstallDotnetCore $InstallDotnetFramework $InstallGolang $InstallJava $InstallOpenJDK $JDKVersion $InstallMaven $InstallGradle $InstallNodejs $InstallPython $IncludePython2x
+Install-DevelopmentTools $InstallVSCode $InstallVSCodeExtensions $InstallVisualStudio $InstallVSEnterpriseVersion $InstallIntelliJ $InstallIntelliJUltimateVersion $InstallGit
+Install-CloudTools $InstallGCPCommandLineTools $InstallAWSCommandLineTools $InstallAzureCommandLineTools
+Install-CollaborationTools $InstallMSTeams $InstallSlack
+Install-WebBrowsers $InstallChrome $InstallFirefox
+Get-SwellabyGitHubRepos -cloneSwellabyRepos: $CloneSwellabyRepos -rootDirectoryPath: $DevWorkspaceRootDirectory
