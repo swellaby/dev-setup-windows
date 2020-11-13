@@ -16,7 +16,7 @@ param (
     [bool]$InstallVisualStudio = $True,
     [bool]$InstallVSEnterpriseVersion = $False,
     [bool]$InstallIntelliJ = $False,
-    [bool]$InstallIntelliJEnterpriseVersion   = $False,
+    [bool]$InstallIntelliJUltimateVersion = $False,
     [bool]$InstallGit = $True,
     [bool]$InstallMobaXterm = $True,
     [bool]$Install7zip = $True,
@@ -54,7 +54,7 @@ if (-NOT (Get-Command 'choco' -ErrorAction SilentlyContinue))
 
 Install-Utilities $InstallMobaXterm $Install7zip
 Install-ProgrammingFrameworks $InstallDotnetCore $InstallDotnetFramework $InstallGolang $InstallJava $InstallOpenJDK $JDKVersion $InstallMaven $InstallGradle $InstallNodejs $InstallPython $IncludePython2x
-Install-DevelopmentTools $InstallVSCode $InstallVSCodeExtensions $InstallVisualStudio $InstallVSEnterpriseVersion $InstallIntelliJ $InstallIntelliJEnterpriseVersion $InstallGit
+Install-DevelopmentTools $InstallVSCode $InstallVSCodeExtensions $InstallVisualStudio $InstallVSEnterpriseVersion $InstallIntelliJ $InstallIntelliJUltimateVersion $InstallGit
 Install-CloudTools $InstallGCPCommandLineTools $InstallAWSCommandLineTools $InstallAzureCommandLineTools
 Install-CollaborationTools $InstallMSTeams $InstallSlack
 Install-WebBrowsers $InstallChrome $InstallFirefox
