@@ -35,8 +35,8 @@ $CurrentIdentity = [Security.Principal.WindowsPrincipal][Security.Principal.Wind
 if (-NOT $CurrentIdentity.IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator'))
 {
     Write-Output 'This script must be run with Administrative permissions on Windows'
-    Write-Output 'Please re-execute this script from an Administrative context. Exiting in 3 seconds....'
-    Start-Sleep -Seconds 3
+    Write-Output 'Please re-execute this script from an Administrative context. Exiting in 10 seconds....'
+    Start-Sleep -Seconds 10
     Exit
 }
 
@@ -45,7 +45,12 @@ if (-NOT (Get-Command 'choco' -ErrorAction SilentlyContinue))
     Write-Output 'Chocolatey NuGet not found. Installing now...'
     Set-ExecutionPolicy Bypass -Scope Process -Force
     Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-    RefreshEnv
+    # Since we had to install Chocolatey ourselves, refreshenv is not immediately available
+    # because $PROFILE hasn't been sourced in. Mimic what Chocolatey does to ensure refreshenv
+    # is available for subsequent commands.
+    $env:ChocolateyInstall = Convert-Path "$((Get-Command choco).Path)\..\.."
+    Import-Module "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
+    refreshenv
 }
 
 (Get-ChildItem -Path "$((Get-Item $PSScriptRoot).FullName)/src/*" -Include "*.ps1" -Exclude "ToolManager.ps1" )| ForEach-Object {
