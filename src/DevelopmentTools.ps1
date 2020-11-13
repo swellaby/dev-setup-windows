@@ -20,22 +20,19 @@ function Install-VSCode()
         }
 
         $recommendedExtensions = @(
-            'ms-python.python',
-            'msjsdiag.debugger-for-chrome',
-            'dbaeumer.vscode-eslint',
-            'eamodio.gitlens',
-            'eg2.tslint',
+            'swellaby.python-pack',
+            'swellaby.node-pack',
+            'swellaby.rust-pack',
+            'swellaby.common-pack',
             'robertohuertasm.vscode-icons',
             'ms-vscode.csharp',
-            'PeterJausovec.vscode-docker',
+            'ms-azuretools.vscode-docker',
             'ms-vscode.Go',
             'ms-vscode.PowerShell',
-            'EditorConfig.EditorConfig',
             'vscjava.vscode-java-pack',
-            'streetsidesoftware.code-spell-checker',
-            'christian-kohler.path-intellisense',
             'ms-vsts.team',
-            'pflannery.vscode-versionlens'
+            'msazurermtools.azurerm-vscode-tools',
+            'ms-azuretools.vscode-bicep'
         )
 
         foreach ($recommendedExtension in $recommendedExtensions)
