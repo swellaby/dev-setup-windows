@@ -10,7 +10,7 @@ param (
     [bool]$InstallGradle = $True,
     [bool]$InstallNodejs = $True,
     [bool]$InstallPython = $True,
-    [bool]$IncludePython2x = $True,
+    [bool]$IncludePython2x = $False,
     [bool]$InstallVSCode = $True,
     [bool]$InstallVSCodeExtensions= $True,
     [bool]$InstallVisualStudio = $True,
