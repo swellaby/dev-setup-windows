@@ -30,7 +30,7 @@ function Install-VSCode()
             'golang.Go',
             'ms-vscode.PowerShell',
             'vscjava.vscode-java-pack',
-            'ms-vsts.team',
+            'ms-azure-devops.azure-pipelines',
             'msazurermtools.azurerm-vscode-tools',
             'ms-azuretools.vscode-bicep'
         )
