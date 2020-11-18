@@ -12,7 +12,17 @@ function Install-Slack()
     Install-Tool 'slack'
 }
 
-function Install-CollaborationTools([bool]$installMSTeams, [bool]$installSlack)
+function Install-Discord()
+{
+    Write-Output 'Installing Discord...'
+    Install-Tool 'discord'
+}
+
+function Install-CollaborationTools(
+    [bool]$installMSTeams,
+    [bool]$installSlack,
+    [bool]$installDiscord
+)
 {
     if ($installMSTeams)
     {
@@ -22,5 +32,10 @@ function Install-CollaborationTools([bool]$installMSTeams, [bool]$installSlack)
     if ($installSlack)
     {
         Install-Slack
+    }
+
+    if ($installDiscord)
+    {
+        Install-Discord
     }
 }

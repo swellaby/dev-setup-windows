@@ -27,6 +27,7 @@ param (
     [bool]$InstallFirefox = $True,
     [bool]$InstallMSTeams = $True,
     [bool]$InstallSlack = $True,
+    [bool]$InstallDiscord = $False,
     [bool]$CloneSwellabyRepos = $False,
     [string]$DevWorkspaceRootDirectory = 'c:/dev'
 )
@@ -61,6 +62,6 @@ Install-Utilities $InstallMobaXterm $Install7zip
 Install-ProgrammingFrameworks $InstallDotnetCore $InstallDotnetFramework $InstallGolang $InstallJava $InstallOpenJDK $JDKVersion $InstallMaven $InstallGradle $InstallNodejs $InstallPython $IncludePython2x
 Install-DevelopmentTools $InstallVSCode $InstallVSCodeExtensions $InstallVisualStudio $InstallVSEnterpriseVersion $InstallIntelliJ $InstallIntelliJUltimateVersion $InstallGit
 Install-CloudTools $InstallGCPCommandLineTools $InstallAWSCommandLineTools $InstallAzureCommandLineTools
-Install-CollaborationTools $InstallMSTeams $InstallSlack
+Install-CollaborationTools $InstallMSTeams $InstallSlack $InstallDiscord
 Install-WebBrowsers $InstallChrome $InstallFirefox
 Get-SwellabyGitHubRepos -cloneSwellabyRepos: $CloneSwellabyRepos -rootDirectoryPath: $DevWorkspaceRootDirectory
