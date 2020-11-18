@@ -12,11 +12,18 @@ function Install-7Zip()
     Install-Tool '7zip'
 }
 
+function Install-Spotify()
+{
+    Write-Output 'Installing Spotify...'
+    Install-Tool 'spotify'
+}
+
 function Install-Utilities
 {
     param (
         [bool]$installMobaXterm,
-        [bool]$install7zip
+        [bool]$install7zip,
+        [bool]$installSpotify
     )
 
     if ($installMobaXterm)
@@ -27,5 +34,10 @@ function Install-Utilities
     if ($install7zip)
     {
         Install-7Zip
+    }
+
+    if ($installSpotify)
+    {
+        Install-Spotify
     }
 }

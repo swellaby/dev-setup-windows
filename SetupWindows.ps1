@@ -28,6 +28,7 @@ param (
     [bool]$InstallMSTeams = $True,
     [bool]$InstallSlack = $True,
     [bool]$InstallDiscord = $False,
+    [bool]$InstallSpotify = $False,
     [bool]$CloneSwellabyRepos = $False,
     [string]$DevWorkspaceRootDirectory = 'c:/dev'
 )
@@ -58,7 +59,7 @@ if (-NOT (Get-Command 'choco' -ErrorAction SilentlyContinue))
     . $_.FullName
 }
 
-Install-Utilities $InstallMobaXterm $Install7zip
+Install-Utilities $InstallMobaXterm $Install7zip $InstallSpotify
 Install-ProgrammingFrameworks $InstallDotnetCore $InstallDotnetFramework $InstallGolang $InstallJava $InstallOpenJDK $JDKVersion $InstallMaven $InstallGradle $InstallNodejs $InstallPython $IncludePython2x
 Install-DevelopmentTools $InstallVSCode $InstallVSCodeExtensions $InstallVisualStudio $InstallVSEnterpriseVersion $InstallIntelliJ $InstallIntelliJUltimateVersion $InstallGit
 Install-CloudTools $InstallGCPCommandLineTools $InstallAWSCommandLineTools $InstallAzureCommandLineTools
