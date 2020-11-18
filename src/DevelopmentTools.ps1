@@ -27,10 +27,10 @@ function Install-VSCode()
             'robertohuertasm.vscode-icons',
             'ms-vscode.csharp',
             'ms-azuretools.vscode-docker',
-            'ms-vscode.Go',
+            'golang.Go',
             'ms-vscode.PowerShell',
             'vscjava.vscode-java-pack',
-            'ms-vsts.team',
+            'ms-azure-devops.azure-pipelines',
             'msazurermtools.azurerm-vscode-tools',
             'ms-azuretools.vscode-bicep'
         )
