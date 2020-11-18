@@ -94,6 +94,7 @@ For example if you wanted to install legacy Python 2.x install and wanted the En
 |InstallFirefox|[Install Firefox Browser][firefox-install-docs]|Boolean|`$True`||
 |InstallMSTeams|[Install Microsoft Teams Client][msteams-install-docs]|Boolean|`$True`||
 |InstallSlack|[Install Slack Client][slack-install-docs]|Boolean|`$True`||
+|InstallDiscord|[Install Discord][discord-install-docs]|Boolean|`$False`||
 |CloneSwellabyRepos|Whether to clone git repositories from the [Swellaby organization on GitHub][github-swellaby-org]|Boolean|`$False`||
 |DevWorkspaceRootDirectory|The root directory to use for cloning any repositories|String|`c:\dev`||
 
@@ -117,4 +118,5 @@ For example if you wanted to install legacy Python 2.x install and wanted the En
 [firefox-install-docs]: https://www.mozilla.org/en-US/firefox/new/
 [msteams-install-docs]: https://www.microsoft.com/en-us/microsoft-365/microsoft-teams/download-app
 [slack-install-docs]: https://slack.com/downloads/windows
+[discord-install-docs]: https://discord.com/download
 [github-swellaby-org]: https://github.com/swellaby
