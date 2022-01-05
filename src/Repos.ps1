@@ -12,10 +12,8 @@ function Get-SwellabyGitHubRepos([bool]$cloneSwellabyRepos, [string]$rootDirecto
     {
         Initialize-DevWorkspaceRoot $rootDirectoryPath
         Set-Location $rootDirectoryPath
-        git clone https://github.com/swellaby/generator-swell.git
         git clone https://github.com/swellaby/vsts-bump.git
         git clone https://github.com/swellaby/vsts-mirror-git-repository.git
-        git clone https://github.com/swellaby/vsts-traffic-monitor.git
         git clone https://github.com/swellaby/captain-githook.git
         git clone https://github.com/swellaby/get-package-version.git
         git clone https://github.com/swellaby/slashhandler.git
